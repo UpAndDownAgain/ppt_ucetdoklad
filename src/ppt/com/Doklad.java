@@ -24,7 +24,7 @@ public class Doklad {
     public Doklad(String cs, LocalDate vystaveni, BigDecimal cena){
         this.cisloDokladu = cs;
         this.datumVystaveni = vystaveni;
-        this.cenaBezDPH = cena;
+        this.cenaBezDPH = new BigDecimal(cena.toString());
 
         this.sazbaDPH = -1;
         this.datumSplatnosti = vystaveni;
@@ -51,12 +51,17 @@ public class Doklad {
         this.calc = d.calc;
     }
 
+    @Override
+    public String toString() {
+        return cisloDokladu;
+    }
+
     public boolean equals(Doklad d){
         return this.cisloDokladu.equals(d.cisloDokladu);
     }
 
     public void calculatePrice(){
-        double tmp = this.cenaBezDPH.doubleValue() * (dph.doubleValue() / 100.0);
+        double tmp = this.cenaBezDPH.doubleValue() + (this.cenaBezDPH.doubleValue() * (sazbaDPH / 100.0));
         this.cenaSDPH = new BigDecimal(tmp);
         this.calc = true;
     }

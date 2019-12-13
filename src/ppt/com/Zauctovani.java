@@ -16,6 +16,13 @@ public class Zauctovani {
         this.dokladZauct = d;
         zauct = false;
     }
+
+    @Override
+    public String toString() {
+        return  "zauctoval='" + zauctoval + '\'' +
+                ", " + dokladZauct;
+    }
+
     public BigDecimal zauctuj(){
         if(dokladZauct.getDatumSplatnosti().isBefore(dokladZauct.getDatumVystaveni())){
             throw new DateTimeException("doklad datum");
@@ -51,6 +58,7 @@ public class Zauctovani {
     public String getZauctoval() {
         return zauctoval;
     }
+
 
     public void setZauctoval(String zauctoval) {
         zauctoval = zauctoval;
